@@ -1,6 +1,9 @@
 "use client";
 import { Button, Typography } from "antd";
 import { useState } from "react";
+import theme from "../theme";
+import { CalenderDate } from "./CalenderDate/CalenderDate";
+import { ThemeProvider } from "@mui/material";
 
 export const MainPage = () => {
   const [showText, setShowText] = useState(false);
@@ -8,6 +11,7 @@ export const MainPage = () => {
   return (
     <div
       style={{
+        backgroundColor: theme.palette.background.default,
         display: "flex",
         flexWrap: "wrap",
         flexDirection: "column",
@@ -17,10 +21,17 @@ export const MainPage = () => {
         justifyContent: "center",
       }}
     >
-      <Button onClick={() => setShowText((prev) => !prev)}>
-        click Me
-      </Button>
-      {showText && <Typography>Text</Typography>}
+      <ThemeProvider theme={theme}>
+        <CalenderDate
+          calenderDate={{
+            date: new Date(),
+            events: [
+              { isAllDay: true, title: "xcxc", description: "vfv" },
+              { isAllDay: true, title: "xcxc", description: "vfv" },
+            ],
+          }}
+        />
+      </ThemeProvider>
     </div>
   );
 };
